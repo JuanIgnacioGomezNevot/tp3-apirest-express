@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Libro</title>
+</head>
+<body>
+    <h2>Agregar un Libro</h2>
+    <form id="libroForm">
+        <input type="text" id="titulo" placeholder="Título" required>
+        <input type="text" id="autor" placeholder="Autor" required>
+        <input type="number" id="año" placeholder="Año" required>
+        <button type="submit">Enviar</button>
+    </form>
+    <script>
+        document.getElementById('libroForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                titulo: document.getElementById('titulo').value,
+                autor: document.getElementById('autor').value,
+                año: parseInt(document.getElementById('año').value)
+            };
+            await fetch('/libros', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            alert('Libro agregado');
+        });
+    </script>
+</body>
+</html>
